@@ -1,20 +1,18 @@
 #include<iostream>
 using namespace std;
 
-char maxOccuringChar(string &s){
+char maxOccuringChar(string &s){//from left
     int n=s.length();
-    int a[256];
-    fill(a,a+256,0);
-    for(int i=0;i<n;i++){
-        a[s[i]]++;
-    }
-    int max=0,maxI=0;
+    bool a[256];
+    fill(a,a+256,false);
+    int minI=-1;
     char res;
-    for(int i=0;i<256;i++){
-        if(a[i]>max){
-            max=a[i];
-            maxI=i;
-            res=i;
+    for(int i=n;i>=0;i--){
+        if(!a[s[i]]){
+            a[s[i]]=true;
+        }else{
+            minI=i;
+            res=s[i];
         }
     }
     return res;

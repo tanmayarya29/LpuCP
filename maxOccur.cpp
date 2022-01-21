@@ -3,16 +3,17 @@ using namespace std;
 
 char maxOccuringChar(string &s){//from left
     int n=s.length();
-    bool a[256];
-    fill(a,a+256,false);
-    int minI=-1;
+    int a[256];
+    fill(a,a+256,0);
+    for(int i=0;i<n;i++){
+        a[s[i]]++;
+    }
+    int max=0;
     char res;
-    for(int i=n;i>=0;i--){
-        if(!a[s[i]]){
-            a[s[i]]=true;
-        }else{
-            minI=i;
-            res=s[i];
+    for(int i=0;i<256;i++){
+        if(a[i]>max){
+            max=a[i];
+            res=min((int)res,i);
         }
     }
     return res;
